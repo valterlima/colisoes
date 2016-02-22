@@ -42,9 +42,6 @@ Animacao.prototype = {
 			b.id = this.qntBolas;
 			this.novoSprite(b);
 			this.qntBolas++;
-
-			console.log('NOVA BOLA');
-			console.log(b);
 		}
 
 		this.limparTela();
@@ -60,7 +57,7 @@ Animacao.prototype = {
 		}
 
 		if (this.colisor.colidiu){
-			console.log('ENERGIA: ' + this.colisor.energia)
+			//console.log('ENERGIA: ' + this.colisor.energia)
 		}
 		
 		var animacao = this;

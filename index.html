@@ -41,73 +41,9 @@ window.onload = function(){
 
 	animacao = new Animacao(context, colisor);
 
-	//animacao.novoSprite(b1);
-	//animacao.novoSprite(b2);
-
 	animacao.ligar();
 
-	/*requestAnimationFrame(animar);
-
-	function animar(){
-		context.clearRect(0, 0, canvas.width, canvas.height);
-
-		b1.atualizar();
-		b2.atualizar();
-
-		b1.desenhar();
-		b2.desenhar();
-
-		colisor.processar();
-
-		requestAnimationFrame(animar);
-
-	}*/
-
-
-
-
-
-
-
-
-	/*var teclado = new Teclado(document);
-	var animacao = new Animacao(context);
-
-	var imgSonic = new Image();
-	imgSonic.src = 'img/spritesheet.png';
-
-	var sonic = new Sonic(context, teclado, imgSonic);
-	sonic.x = 0;
-	sonic.y = 200;
-
-	animacao.novoSprite(sonic);
-
-	imgSonic.onload = function(){
-		animacao.ligar();
-	}*/
 }
-
-
-
-	/*window.onload = function(){
-		var canvas = document.getElementById('canvas_animacao')
-		var context = canvas.getContext('2d')
-
-		var teclado = new Teclado(document);
-		var animacao = new Animacao(context);
-
-		var heroi = new Heroi(context, teclado, animacao);
-		heroi.x = 100;
-		heroi.y = 100;
-		animacao.novoSprite(heroi);
-
-		teclado.disparou(ESPACO, function(){
-			heroi.atirar();
-		})
-
-		animacao.ligar();
-
-	}*/
 
 </script>
 

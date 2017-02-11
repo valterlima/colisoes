@@ -1,40 +1,139 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-	<title>Primeiro Teste: Loop de Animação com Sprites</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Canvas Animation</title>
 	<script src="animacao.js"></script>
 	<script src="bola.js"></script>
 	<script src="colisor.js"></script>
-
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<style>
+		canvas {
+			background-color: white; 
+			width: auto;
+			height: auto;
+			border: 1px solid black;
+		}
+	</style>
 </head>
 
 <body>
-<canvas id="canvas_animacao" width="800" height="600" style="border: 1px solid black">
-	NAO SUPORTA CANVAS
-</canvas>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h3>Canvas Colisions <a href="#" id="pause">(Pause)</a></h3> 
+					
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<canvas id="canvas_animacao" width="600" height="400">
+					NAO SUPORTA CANVAS
+				</canvas>
+			</div>
 
-<a href="#" id="pause">Pause</a>
+			<div class="col-md-4">
+				<div class="row">
+					<form onsubmit="event.preventDefault(); createBall();" id="ballForm">
+						<fieldset>
+							<legend>New ball <a href="#" onClick="randomBall()" >(new random ball)</a></legend>
+							<div>
+								<label for="radius">Radius and Mass:</label>
+								<input type="number" min="1" max="50" name="radius" value="" required/>
+							</div>
+							<div>
+								<label for="color">Color:</label>
+								<input type="color" name="color" value="#ff0000" required/>
+							</div>
+							<div>
+								<label for="xPos">x Position:</label>
+								<input type="number" min="100" max="600" name="xPos" value="" required/>
+							</div>
+							<div>
+								<label for="yPos">y Position:</label>
+								<input type="number" min="100" max="400" name="yPos" value="" required/>
+							</div>
+							<div>
+								<label for="xVel">x Velocity:</label>
+								<input type="number" min="-10" max="10" name="xVel" value="" required/>
+							</div>
+							<div>
+								<label for="yVel">y Velocity:</label>
+								<input type="number" min="-10" max="10" name="yVel" value="" required/>
+							</div>
+							<div class="submit">
+								<input type="submit" value="Create">
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<br />
+				<div class="row">
+					<h3>Existing balls</h3>
+					<ul id="ballList">	
+					</ul>						
+				</div>
+			</div>
+	</div>
 
-<script>
-window.onload = function(){
+	<script>
+		function randomBall(){
+			animacao.newRandomBall();
+			generateBallList();
+		}
+		function createBall(){
+			var params = {
+				'radius': parseInt(document.getElementsByName("radius")[0].value),
+				'color': document.getElementsByName("color")[0].value,
+				'xPos': parseInt(document.getElementsByName("xPos")[0].value),
+				'yPos': parseInt(document.getElementsByName("yPos")[0].value),
+				'xVel': parseInt(document.getElementsByName("xVel")[0].value),
+				'yVel': parseInt(document.getElementsByName("yVel")[0].value),
+			}
 
-	var canvas = document.getElementById('canvas_animacao');
-	var context = canvas.getContext('2d');
+			animacao.newBall(params);
+			document.getElementById("ballForm").reset();
 
-	colisor = new Colisor();
+			generateBallList();
+		}
 
-	animacao = new Animacao(context, colisor);
+		function generateBallList(){
+			var htmlElement = "";
+			animacao.sprites.forEach(function(element) {
+				htmlElement += '<li id="ball-'+element.id+'"><span style="color:'+element.cor+'">Ball '+element.id+' </span><a href="#" onClick="removeBall('+element.id+')" style="color:red">(x)</a></li>'; // HTML string
+			}, this);
+			
+			var div = document.getElementById("ballList");
+			div.innerHTML = htmlElement;
+			var elements = div.childNodes;
+		}
 
-	animacao.ligar();
+		function removeBall(id){
+			animacao.removeBall(id);
+		}
 
-	var element = document.getElementById("pause");
-	element.addEventListener('click', function() { 
-		animacao.pause();
-	 }, false);
+		window.onload = function(){
 
-}
+			var canvas = document.getElementById('canvas_animacao');
+			var context = canvas.getContext('2d');
 
-</script>
+			colisor = new Colisor();
+
+			animacao = new Animacao(context, colisor);
+
+			animacao.ligar();
+
+			var element = document.getElementById("pause");
+			element.addEventListener('click', function() { 
+				animacao.pause();
+			}, false);
+
+		}
+	</script>
 
 </body>
+
 </html>

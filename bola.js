@@ -1,13 +1,13 @@
 var cores = ['green', 'red', 'blue', 'black', 'orange', 'gray', 'cyan', 'yellow'];
 
-function Bola(context){
-	this.velX = randomIntFromInterval(-5,5);
-	this.velY = randomIntFromInterval(-5,5);
-	this.raio = randomIntFromInterval(10,20);
+function Bola(context, ballParams = {}){
+	this.velX = ballParams.xVel || randomIntFromInterval(-5,5);
+	this.velY = ballParams.yVel || randomIntFromInterval(-5,5);
+	this.raio = ballParams.radius || randomIntFromInterval(10,50);
 	this.massa = this.raio;
-	this.cor = cores[randomIntFromInterval(1,8)];
-	this.x = randomIntFromInterval(this.raio,300-this.raio);
-	this.y = randomIntFromInterval(this.raio,300-this.raio);
+	this.cor = ballParams.color || cores[randomIntFromInterval(1,8)];
+	this.x = ballParams.xPos || randomIntFromInterval(this.raio,600-this.raio);
+	this.y = ballParams.yPos || randomIntFromInterval(this.raio,400-this.raio);
 	this.context = context;
 	this.id = 0;
 }

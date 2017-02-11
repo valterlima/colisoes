@@ -12,7 +12,7 @@ Animacao.prototype = {
 		this.sprites.push(sprite);
 		this.colisor.novoSprite(sprite);
 
-		//console.table(this.colisor.sprites)
+		console.table(this.colisor.sprites)
 	},
 	removerSprite: function(sprite){
 		this.sprites.splice(this.sprites.indexOf(sprite), 1)
@@ -38,6 +38,24 @@ Animacao.prototype = {
 		}
 	},
 
+	newBall: function(params){
+		var b = new Bola(this.context, params);
+		b.id = this.qntBolas;
+		this.novoSprite(b);
+		this.qntBolas++;
+	},
+
+	removeBall: function(id){
+		this.removerSprite(this.sprites[id]);
+	},
+	
+	newRandomBall: function(){
+		var b = new Bola(this.context);
+		b.id = this.qntBolas;
+		this.novoSprite(b);
+		this.qntBolas++;
+	},
+
 	proximoFrame: function(){
 		if (!this.ligado) return;
 
@@ -46,13 +64,13 @@ Animacao.prototype = {
 		if (!this.ultimoTempo) this.ultimoTempo = agora;
 		if (!this.qntBolas) this.qntBolas = 0;
 
-		if (this.intervalo < agora - this.ultimoTempo && this.qntBolas < 5){
+		/*if (this.intervalo < agora - this.ultimoTempo && this.qntBolas < 5){
 			this.ultimoTempo = agora;
 			var b = new Bola(this.context);
 			b.id = this.qntBolas;
 			this.novoSprite(b);
 			this.qntBolas++;
-		}
+		}*/
 
 		this.limparTela();
 

@@ -9,9 +9,11 @@
 </head>
 
 <body>
-<canvas id="canvas_animacao" width="300" height="300" style="border: 1px solid black">
-	NAO SUPORT BLABALBBLA
+<canvas id="canvas_animacao" width="800" height="600" style="border: 1px solid black">
+	NAO SUPORTA CANVAS
 </canvas>
+
+<a href="#" id="pause">Pause</a>
 
 <script>
 window.onload = function(){
@@ -19,29 +21,16 @@ window.onload = function(){
 	var canvas = document.getElementById('canvas_animacao');
 	var context = canvas.getContext('2d');
 
-	var b1 = new Bola(context);
-	b1.x = 100;
-	b1.y = 200;
-	b1.velX = 2;
-	b1.velY = 0;
-	b1.cor = 'blue';
-	b1.raio = 10;
-	b1.massa = 100;
-
-	var b2 = new Bola(context);
-	b2.x = 200;
-	b2.y = 200;
-	b2.velX = 0;
-	b2.velY = 0 ;
-	b2.cor = 'black';
-	b2.raio = 10;
-	b2.massa = 10;
-
 	colisor = new Colisor();
 
 	animacao = new Animacao(context, colisor);
 
 	animacao.ligar();
+
+	var element = document.getElementById("pause");
+	element.addEventListener('click', function() { 
+		animacao.pause();
+	 }, false);
 
 }
 

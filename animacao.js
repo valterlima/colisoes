@@ -12,7 +12,7 @@ Animacao.prototype = {
 		this.sprites.push(sprite);
 		this.colisor.novoSprite(sprite);
 
-		console.table(this.colisor.sprites)
+		//console.table(this.colisor.sprites)
 	},
 	removerSprite: function(sprite){
 		this.sprites.splice(this.sprites.indexOf(sprite), 1)
@@ -26,6 +26,16 @@ Animacao.prototype = {
 
 	desligar: function(){
 		this.ligado = false;
+	},
+
+	pause: function(){
+		if (this.ligado){
+			this.ligado = false;
+		}
+		else{
+			this.ligado = true;
+			this.proximoFrame();
+		}
 	},
 
 	proximoFrame: function(){
